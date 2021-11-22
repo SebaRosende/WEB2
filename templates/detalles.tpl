@@ -22,7 +22,7 @@
             {if isset($smarty.session.USER_ID)}
                   <td> <label>Opiniones</label></td>
                 
-                <td><textarea required="required" name="coment" cols="30" rows="1" placeholder="Comentar"></textarea> </td>
+                <td><textarea required="required" name="detalle" cols="30" rows="1" placeholder="Comentar"></textarea> </td>
                 <td><label>Calificar</label>
             
                 <select name="puntaje" id="id_puntaje">

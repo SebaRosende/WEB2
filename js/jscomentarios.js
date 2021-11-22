@@ -42,7 +42,7 @@ async function AddComentarios(e) {
     let data = new FormData(form);
     let comentario = {
         id_impresora: data.get('id_impresora'),
-        coment: data.get('coment'),
+        detalle: data.get('detalle'),
         puntaje: data.get('puntaje'),
     }
     try {

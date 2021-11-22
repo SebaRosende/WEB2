@@ -14,7 +14,6 @@ class UserController
         $this->usermodel = new UserModel();
         $this->authHelper = new AuthHelper();
         $this->authController = new AuthController();
-      
     }
 
     public function showUsuarios()
@@ -30,7 +29,7 @@ class UserController
         }
     }
 
-   function editarUsuario()
+    function editarUsuario()
     {
         $id_user = $_REQUEST['id_user'];
         $rol = $_REQUEST['select_rol'];
@@ -40,7 +39,14 @@ class UserController
 
     function eliminarUsuario($id)
     {
-        $this->usermodel->deleteUserByID($id);
-        $this->userview->refreshUsers();
+
+        $this->authHelper->checkLoggedIn();
+        $rol = $this->authHelper->checkRol();
+        if ($rol) {
+            $this->usermodel->deleteUserByID($id);
+            $this->userview->refreshUsers();
+        } else {
+            echo "No tiene derechos de administrador";
+        }
     }
 }

@@ -21,7 +21,7 @@ if (!empty($_GET['action'])) {
 }
 
 $params = explode('/', $action);
-$controlador = new controller(); 
+$controlador = new controller();
 $controladorMetodo = new metodoController();
 $controladorImpresoras = new impresorasController();
 $controladorusuarios = new UserController();
@@ -96,12 +96,13 @@ switch ($params[0]) {
         $controladorusuarios->showUsuarios();
         break;
     case 'cambiarRol':
+        $authController = new AuthController();
         $controladorusuarios->editarUsuario();
         break;
     case 'eliminarUser':
         $authController = new AuthController();
         $controladorusuarios->eliminarUsuario($params[1]);
-        break;   
+        break;
     default:
         $controlador->showHome();  //Por defecto va al Home.
         break;

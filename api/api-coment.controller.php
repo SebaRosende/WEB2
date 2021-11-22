@@ -21,7 +21,7 @@ class ApiTaskController
     {
         $id = $params[':ID'];
         $data = $this->getBody();
-        $comentario = $data->coment;
+        $comentario = $data->detalle;
         $puntaje = $data->puntaje;
         $idComentario = $this->model->insertComent($id, $comentario, $puntaje);
         $comentarios = $this->model->getComentbyID($idComentario);
