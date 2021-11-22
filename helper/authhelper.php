@@ -17,15 +17,6 @@ class AuthHelper
         $_SESSION['LAST_ACTIVITY'] = time();
         $_SESSION['ULTIMO_ACCESO'] = date("Y-n-j H:i:s");
     }
-    /*
-    public function checkLoggedIn() {
-        if (empty($_SESSION['USER_ID'])) {
-            header("Location: " . LOGIN);
-            die();
-                    }
-                }
-
-      */
 
     public function UserLogged()
     {

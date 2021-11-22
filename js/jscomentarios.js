@@ -2,7 +2,7 @@
 const API_URL = "api/comentario/impresora";
 const API_URL1 = "api/comentario";
 
-let app = new Vue({
+let app = new Vue({  //VUE
     el: "#app",
     data: {
         titulo: "Comentarios de usuarios",
@@ -57,7 +57,6 @@ async function AddComentarios(e) {
         if (response.ok) {
             console.log(response);
             let dato = await response.json();
-            console.log(dato);
             app.comentarios.push(dato);
         }
 
