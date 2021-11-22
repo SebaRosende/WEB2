@@ -3,7 +3,7 @@ select.addEventListener("change", seleccionarMetodo);
 
 
 async function seleccionarMetodo() {
-    
+
     let metodo = select.value
     try {
         let respuesta = await fetch(`http://localhost/proyectos/WEB-2/PHP/TPE_SEBA/tpweb2/filtrado/${metodo}`);
@@ -13,11 +13,9 @@ async function seleccionarMetodo() {
         } else {
             document.querySelector("#ajax-contenedor").innerHTML = "Fallo URL";
         }
-
     }
     catch (error) {
         console.log(error);
         document.querySelector("#ajax-contenedor").innerHTML = "Error al solicitar";
     }
 }
-

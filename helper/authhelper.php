@@ -46,7 +46,6 @@ class AuthHelper
 
     public function checkLoggedIn()
     {
-
         if (isset($_SESSION['USER_ID'])) { // si esta logueado
             if (time() - $_SESSION['LAST_ACTIVITY'] > 900) { // expiro el timeout 1800/60=30 minutos
                 session_destroy();
