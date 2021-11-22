@@ -16,13 +16,13 @@ class controller
 
     public function __construct()
     {
-        $this->improrasview = new ImpresoraView();   
-        $this->userview = new UserView();   
+        $this->improrasview = new ImpresoraView();
+        $this->userview = new UserView();
         $this->modelimpresora = new ImpresoraModel();
         $this->metodomodel = new MetodoModel();
         $this->modelUser = new UserModel();
         $this->authHelper = new AuthHelper();
-        $this->authController = new AuthController();        
+        $this->authController = new AuthController();
     }
 
     /*-------------- Render de Views ---------------*/
@@ -33,20 +33,20 @@ class controller
         $this->improrasview->renderHome($allPrinters);
     }
 
-   
+
     function showDetails()
     {
-             
+        $this->authHelper->UserLogged();
         $id = $_REQUEST['id'];
         $detalles = $this->modelimpresora->getPrinterByID($id);  //llamo por id a la db.
-         $this->improrasview->renderDetails($detalles);          //tipo, modelo, dpi, toner, tinta.
+        $this->improrasview->renderDetails($detalles);          //tipo, modelo, dpi, toner, tinta.
 
-       
+
     }
     function showFilter()
     {
         $Metodos = $this->metodomodel->getAllMetodos();
-         $this->improrasview->renderFilter($Metodos);         //quiero impresoras laser color.
+        $this->improrasview->renderFilter($Metodos);         //quiero impresoras laser color.
     }
 
     function showFiltrado($filtro)
@@ -60,11 +60,11 @@ class controller
 
     function showAdmin()
     {
-        
+
         $rol = $this->authHelper->checkRol();
 
-        if ($rol) {   
-            $this->authHelper->checkLoggedIn();       
+        if ($rol) {
+            $this->authHelper->checkLoggedIn();
             $impresoras = $this->modelimpresora->getAllPrinters();
             $metodos = $this->metodomodel->getAllMetodos();
             $this->userview->renderAdmin($impresoras, $metodos);   //agregar, borrar, editar.
@@ -74,7 +74,7 @@ class controller
     }
 
     function showRegister()
-    {       
+    {
         $this->userview->renderRegister();
         if (!empty($_POST['email']) && !empty($_POST['password'])) {  //Verifico si los campos estan vacios o no.
             $userEmail = $_POST['email'];

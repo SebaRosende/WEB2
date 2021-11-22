@@ -70,8 +70,8 @@
                             <form method="POST" action='editar_impresora'>  
                                 <tr>                            
                                     <td><input id="id_oculto" type="text" name="id_impresora"  style="width : 50px"  value={$info->id_impresora} readonly></td>
-                                    <td><input required="required" type="text" name="marca" value={$info->marca}></td>
-                                    <td><input required="required" type="text" name="modelo" value={$info->modelo}></td>
+                                    <td><input required="required" type="text" name="marca" value="{$info->marca}"></td>
+                                    <td><input required="required" type="text" name="modelo" value="{$info->modelo}"></td>
                                     <td><input required="required" type="text" name="descripcion" style="width : 300px" value="{$info->descripcion}"></td>
                                     <td><select name="select_metodo" id="selectMetodo">
                                         <option value="{$info->id_metodo_fk}" disable>{$info->metodo}</option>

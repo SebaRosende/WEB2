@@ -5,7 +5,7 @@
         <ul class="list-group">
             <li v-for="dato in comentarios" class="list-group-item d-flex">
 
-                {{dato.detalle}}
+                {{dato.detalle}}       
                 <div>{{ calificacion }} {{dato.puntaje}}</div>
 {/literal}
 
