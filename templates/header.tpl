@@ -16,10 +16,12 @@
   <nav>
       <a href='home'>Home</a>
       <a href='filtrar'>Categorias</a>
+
      {if isset($smarty.session.USER_ID)}
           {if ($smarty.session.USER_ROL)==1}
           <a href='administrar'>Administrar</a>
           <a href='usuarios'>Usuarios</a>
+
         {/if}
         <a href='logout'>Logout({$smarty.session.USER_EMAIL})</a>
      

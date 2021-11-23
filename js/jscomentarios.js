@@ -1,6 +1,7 @@
 "use strict"
 const API_URL = "api/comentario/impresora";
 const API_URL1 = "api/comentario";
+const API_ALL = "api/impresoras";
 
 let app = new Vue({  //VUE
     el: "#app",
@@ -9,7 +10,6 @@ let app = new Vue({  //VUE
         calificacion: "Calificación:",
         comentarios: [],
     },
-
     methods: {
         remove: function (id) {
             borrarComentario(id)
@@ -22,7 +22,6 @@ form.addEventListener('submit', AddComentarios);
 
 let id = document.querySelector("#id-coment");
 
-
 async function MostrarComentarios() {
     try {
         let response = await fetch(API_URL + `/${id.value}`);
@@ -33,7 +32,6 @@ async function MostrarComentarios() {
         console.log(error);
     }
 }
-
 
 MostrarComentarios();
 
@@ -59,7 +57,6 @@ async function AddComentarios(e) {
             let dato = await response.json();
             app.comentarios.push(dato);
         }
-
     } catch (e) {
         console.log(e)
     }
@@ -71,7 +68,6 @@ async function borrarComentario(id) {
         let response = await fetch(API_URL1 + `/${id}`, {
             "method": "DELETE",
         });
-
         if (response.status == 201) {
             console.log("BORRADO");
         }
@@ -81,3 +77,45 @@ async function borrarComentario(id) {
     }
     MostrarComentarios();
 }
+/*
+
+Siguiente = document.querySelector("#btn_anterior");
+Siguiente.addEventListener("click", proximaImpresora);
+
+function proximaImpresora() {
+    e.preventDefault();
+    let data = new FormData(form);
+    console.log(data.get('id_impresora'));
+}
+
+let btn_nav = new Vue({  //VUE
+    el: "#btn_nav",
+    data: {
+        impresora: [],
+    },
+    methods: {
+        remove: function (id) {
+            borrarComentario(id)
+        }
+    }
+})
+
+
+let btn_next = document.querySelector("#btn_next");
+btn_next.addEventListener('click', Execute);
+
+async function Execute() {
+    console.log("Boton");
+    getAllPrinters();
+}
+
+async function getAllPrinters(){
+    try {
+        let response = await fetch(API_ALL);
+        let impresoras = await response.json();
+        console.log(impresoras)
+    }
+    catch (error) {
+        console.log(error);
+    }
+}  */

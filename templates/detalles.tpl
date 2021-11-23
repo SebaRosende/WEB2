@@ -16,8 +16,8 @@
                 </tr>
             {/foreach}
           
-           
-              
+        <input type="hidden" id="id_impresora" value={$info->id_impresora}></td>
+
             <tr>
             {if isset($smarty.session.USER_ID)}
                   <td> <label>Opiniones</label></td>
@@ -39,15 +39,28 @@
        
         </form>
     </tbody>
+    
 </table>
 
+<!--
+{literal}
+
+<div id="btn_nav">
 
 
-{include file='vue/comentariosVue.tpl'}
+</div>
+{/literal}
+
+<button name="btn_next" id="btn_next">Siguiente</button>
+
+
+-->
+
+{include file='vue/comentariosVue.tpl'}  
 
 
 
 <script src="js/jscomentarios.js"></script>
 
 
-{include file = 'footer.tpl'}
+{include file = 'footer.tpl'} 

@@ -38,4 +38,5 @@ class ImpresoraView
         $this->smarty->assign('filtro', $filtro);
         $this->smarty->display('templates/filtrado.tpl');
     }
+
 }
