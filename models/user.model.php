@@ -10,8 +10,7 @@ class UserModel
         $this->db_impresoras = new PDO('mysql:host=localhost;' . 'dbname=db_impresoras;charset=utf8', 'root', '');
     }
 
-
-    /*Funciones de usuarios*/
+    /*-----------------Funciones de usuarios-----------------*/
     function getUser($email)
     {
         $query = $this->db_impresoras->prepare('SELECT * FROM usuarios WHERE email = ?'); //Busco user en la BDD.
@@ -25,7 +24,7 @@ class UserModel
         $query->execute([$userEmail, $userPassword, 2]);
     }
 
-    function getAllUser()
+    function getAllUser()  //Busca las 2 tablas, usuarios y roles.
     {
         $query = $this->db_impresoras->prepare('SELECT * FROM usuarios JOIN roles ON usuarios.id_rol_fk=roles.id_rol');
         $query->execute();
@@ -37,7 +36,7 @@ class UserModel
     {
         $query = $this->db_impresoras->prepare('SELECT * FROM roles');
         $query->execute();
-        $allRoles = $query->fetchAll(PDO::FETCH_OBJ); 
+        $allRoles = $query->fetchAll(PDO::FETCH_OBJ);
         return $allRoles;
     }
 

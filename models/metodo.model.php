@@ -8,11 +8,8 @@ class MetodoModel
     public function __construct()
     {
         $this->db_impresoras = new PDO('mysql:host=localhost;' . 'dbname=db_impresoras;charset=utf8', 'root', '');
-        
     }
 
-    
-   
     function getAllMetodos()
     {
         $query = $this->db_impresoras->prepare('SELECT * FROM metodos');
@@ -26,8 +23,6 @@ class MetodoModel
         $query = $this->db_impresoras->prepare('DELETE FROM metodos WHERE id_metodo= ?');
         $query->execute([$id]);
     }
-
-   
 
     function createMetodo()
     {
@@ -44,12 +39,9 @@ class MetodoModel
 
     function getPrinterByFilter($filtro)
     {
-
         $query = $this->db_impresoras->prepare('SELECT * FROM metodos WHERE metodo=?');
         $query->execute([$filtro]);
         $impresoras = $query->fetch(PDO::FETCH_OBJ);
         return $impresoras;
     }
-
-
 }

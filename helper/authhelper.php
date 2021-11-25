@@ -18,30 +18,27 @@ class AuthHelper
         $_SESSION['ULTIMO_ACCESO'] = date("Y-n-j H:i:s");
     }
 
-    public function UserLogged()
+    public function UserLogged()  //Verifica Sesion abierta.
     {
         if (isset($_SESSION['USER_ID'])) {
             $fechaGuardada = $_SESSION['ULTIMO_ACCESO'];
-            $ahora = date("Y-n-j H:i:s");
+            $ahora = date("Y-n-j H:i:s");  //Crea una marca de tiempo.
             $tiempo_transcurrido = (strtotime($ahora) - strtotime($fechaGuardada));
-            if ($tiempo_transcurrido >= 900) {
+            if ($tiempo_transcurrido >= 100) {  //Verifica el tiempo y cierra la sesion.
                 session_destroy();
                 header('Location: ' . LOGIN);
             } else {
-                $_SESSION['ULTIMO_ACCESO'] = $ahora;
+                $_SESSION['ULTIMO_ACCESO'] = $ahora;  //Crea nueva marca.
             }
         }
     }
 
-
-
-    public function checkLoggedIn()
+    public function checkLoggedIn()  //Verifica si esta logueado.
     {
-        if (isset($_SESSION['USER_ID'])) { // si esta logueado
-            if (time() - $_SESSION['LAST_ACTIVITY'] > 900) { // expiro el timeout 1800/60=30 minutos
+        if (isset($_SESSION['USER_ID'])) {
+            if (time() - $_SESSION['LAST_ACTIVITY'] > 100) { // expiro el timeout 1800/60=30 minutos
                 session_destroy();
                 header('Location: ' . LOGIN);
-
                 return true;
                 die();
             }
@@ -53,8 +50,7 @@ class AuthHelper
         }
     }
 
-
-    public function checkRol()
+    public function checkRol()  //Verifica el Rol.
     {
         if (isset($_SESSION['USER_ROL'])) {
             if (($_SESSION['USER_ROL']) == 1) {
@@ -65,7 +61,7 @@ class AuthHelper
         }
     }
 
-    function logout()
+    function logout()  //Termina la sesion.
     {
         session_destroy();
         header("Location: " . BASE_URL . 'home');

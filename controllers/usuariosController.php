@@ -21,25 +21,30 @@ class UserController
         $this->authHelper->checkLoggedIn();
         $rol = $this->authHelper->checkRol();
         if ($rol) {
-            $users = $this->usermodel->getAllUser();
-            $roles = $this->usermodel->getAllRoles();
+            $users = $this->usermodel->getAllUser();  //Busca todos los usuarios.
+            $roles = $this->usermodel->getAllRoles();  //Busca los roles.
             $this->userview->renderUsers($users, $roles);
         } else {
             echo "No tiene derechos de administrador";
         }
     }
 
-    function editarUsuario()
+    function editarUsuario()  //Editar rol de usuario.
     {
-        $id_user = $_REQUEST['id_user'];
-        $rol = $_REQUEST['select_rol'];
-        $this->usermodel->editUser($id_user, $rol);
-        $this->userview->refreshUsers();
+        $this->authHelper->checkLoggedIn();
+        $rol = $this->authHelper->checkRol();
+        if ($rol) {
+            $id_user = $_REQUEST['id_user'];
+            $rol = $_REQUEST['select_rol'];
+            $this->usermodel->editUser($id_user, $rol);
+            $this->userview->refreshUsers();
+        } else {
+            echo "No tiene derechos de administrador";
+        }
     }
 
     function eliminarUsuario($id)
     {
-
         $this->authHelper->checkLoggedIn();
         $rol = $this->authHelper->checkRol();
         if ($rol) {

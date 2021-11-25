@@ -11,8 +11,14 @@ let app = new Vue({  //VUE
         comentarios: [],
     },
     methods: {
-        remove: function (id) {
+        remove: function (id) {   //Elimina Comentario 
             borrarComentario(id)
+        },
+        ascendente: function (id_impresora_fk) {  //Orden ascentente de comentarios por puntaje
+            ordenar(id_impresora_fk, 'ascendente')
+        },
+        descendente: function (id_impresora_fk) { //Orden descendente de comentarios por puntaje
+            ordenar(id_impresora_fk, 'descendente')
         }
     }
 })
@@ -22,7 +28,7 @@ form.addEventListener('submit', AddComentarios);
 
 let id = document.querySelector("#id-coment");
 
-async function MostrarComentarios() {
+async function MostrarComentarios() {  //Busca comentarios por un ID de impresora.
     try {
         let response = await fetch(API_URL + `/${id.value}`);
         let nComentarios = await response.json();
@@ -35,7 +41,7 @@ async function MostrarComentarios() {
 
 MostrarComentarios();
 
-async function AddComentarios(e) {
+async function AddComentarios(e) {  //Agrega comentario.
     e.preventDefault();
     let data = new FormData(form);
     let comentario = {
@@ -51,19 +57,16 @@ async function AddComentarios(e) {
             },
             body: JSON.stringify(comentario),
         });
-
         if (response.ok) {
-            console.log(response);
             let dato = await response.json();
-            app.comentarios.push(dato);
+            app.comentarios.push(dato);  //Pushea e imprime.
         }
     } catch (e) {
         console.log(e)
     }
 }
 
-
-async function borrarComentario(id) {
+async function borrarComentario(id) {  //Elimina comentario por ID.
     try {
         let response = await fetch(API_URL1 + `/${id}`, {
             "method": "DELETE",
@@ -77,45 +80,35 @@ async function borrarComentario(id) {
     }
     MostrarComentarios();
 }
-/*
 
-Siguiente = document.querySelector("#btn_anterior");
-Siguiente.addEventListener("click", proximaImpresora);
 
-function proximaImpresora() {
-    e.preventDefault();
-    let data = new FormData(form);
-    console.log(data.get('id_impresora'));
-}
 
-let btn_nav = new Vue({  //VUE
-    el: "#btn_nav",
-    data: {
-        impresora: [],
-    },
-    methods: {
-        remove: function (id) {
-            borrarComentario(id)
+async function ordenar(id_printer, order) {
+    if (order == 'ascendente') {
+        try {
+            let response = await fetch(API_URL + `/${id_printer}` + `/orderasc`);
+            let comAsc = await response.json();
+            console.log(comAsc);
+            app.comentarios = comAsc;
+        }
+        catch (error) {
+            console.log(error);
         }
     }
-})
-
-
-let btn_next = document.querySelector("#btn_next");
-btn_next.addEventListener('click', Execute);
-
-async function Execute() {
-    console.log("Boton");
-    getAllPrinters();
+    else if (order == 'descendente') {
+        try {
+            let response = await fetch(API_URL + `/${id_printer}` + `/orderdesc`);
+            let comDesc = await response.json();
+            console.log(comDesc);
+            app.comentarios = comDesc;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    else {
+        console.log('ERROR');
+    }
 }
 
-async function getAllPrinters(){
-    try {
-        let response = await fetch(API_ALL);
-        let impresoras = await response.json();
-        console.log(impresoras)
-    }
-    catch (error) {
-        console.log(error);
-    }
-}  */
+

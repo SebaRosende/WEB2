@@ -16,17 +16,17 @@ class AuthController
         $this->authHelper = new AuthHelper();
     }
 
-    public function showLogin()
+    public function showLogin() //Muestro formulario de Login.
     {
-        $this->userview->renderLogin();  //Muestro formulario de Login.
+        $this->userview->renderLogin();  
     }
 
-    public function showLogout()
+    public function showLogout()  //Cierra cesion y devuelve al home.
     {
         $this->authHelper->logout();        
     }
 
-    public function login()
+    public function login()  //Verificacion de cuenta.
     {
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             $email = $_POST['email'];

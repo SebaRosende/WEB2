@@ -10,7 +10,6 @@ class ApiView
     echo json_encode($data);
   }
 
-
   private function requestStatus($code)
   {
     $status = array(

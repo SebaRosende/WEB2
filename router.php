@@ -72,6 +72,11 @@ switch ($params[0]) {
         $authController = new AuthController();
         $controladorImpresoras->eliminarImpresora($params[1]);
         break;
+        /*
+    case 'upload_image':
+        $authController = new AuthController();
+        $controladorImpresoras->uploadImage();
+        */
 
         /*---------  Administrar Metodos ----------------*/
     case 'agregar_metodo':

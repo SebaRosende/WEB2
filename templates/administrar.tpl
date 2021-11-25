@@ -39,6 +39,7 @@
     <input required="required" type="text" name="marca" placeholder="Canon">
     <label>Modelo</label>
     <input required="required" type="text" name="modelo" placeholder="TX135">
+    
     <label>Metodo</label>    
     <select  name="select_metodo" id="selectMetodo" >
         {foreach from=$metodo item=$info}                      
@@ -64,15 +65,20 @@
                         <th >Marca</th>
                         <th >Modelo</th>
                         <th >Descripción</th>
+                        <th> Imagen </th>
+                        <th>Eliminar imagen</th>
                         <th >Método</th>
                     </tr>
                         {foreach from=$impresora item=$info} 
-                            <form method="POST" action='editar_impresora'>  
+                            <form method="POST" action='editar_impresora' enctype="multipart/form-data">  
                                 <tr>                            
                                     <td><input id="id_oculto" type="text" name="id_impresora"  style="width : 50px"  value={$info->id_impresora} readonly></td>
                                     <td><input required="required" type="text" name="marca" value="{$info->marca}"></td>
                                     <td><input required="required" type="text" name="modelo" value="{$info->modelo}"></td>
                                     <td><input required="required" type="text" name="descripcion" style="width : 300px" value="{$info->descripcion}"></td>
+                                    <td><input  type="text" name="ruta_imagen" value="{$info->imagen}">
+                                    <input  type="file"  name="input_name"></td>
+                                    <td><input type="checkbox" value="false" name="eliminar_foto"></th>
                                     <td><select name="select_metodo" id="selectMetodo">
                                         <option value="{$info->id_metodo_fk}" disable>{$info->metodo}</option>
                                         {foreach from=$metodo item=$info}               

@@ -7,7 +7,6 @@ require_once 'view/impresora.view.php';
 
 class controller
 {
-
     private $modelimpresora;
     private $metodomodel;
     private $modelUser;
@@ -27,53 +26,49 @@ class controller
 
     /*-------------- Render de Views ---------------*/
 
-    function showHome()
+    function showHome()  //Muestra el home.
     {
         $allPrinters = $this->modelimpresora->getAllPrinters(); //llamas a la base de datos.
-        $this->improrasview->renderHome($allPrinters);
+        $this->improrasview->renderHome($allPrinters);  
     }
 
-
-    function showDetails()
+    function showDetails()  //Muestra el detalle.
     {
-        $this->authHelper->UserLogged();
+        $this->authHelper->UserLogged();  //Verifica sesion abierta.
         $id = $_REQUEST['id'];
-        $detalles = $this->modelimpresora->getPrinterByID($id);  //llamo por id a la db.
-        $this->improrasview->renderDetails($detalles);          //tipo, modelo, dpi, toner, tinta.
+        $detalles = $this->modelimpresora->getPrinterByID($id);  
+        $this->improrasview->renderDetails($detalles);  //tipo, modelo, dpi, toner, tinta.
 
 
     }
-    function showFilter()
+    function showFilter()  //Categorias.
     {
         $Metodos = $this->metodomodel->getAllMetodos();
-        $this->improrasview->renderFilter($Metodos);         //quiero impresoras laser color.
+        $this->improrasview->renderFilter($Metodos);     
     }
 
-    function showFiltrado($filtro)
+    function showFiltrado($filtro)  //Render SPA de la respuesta del filtro. (Select).
     {
         $impresoras = $this->modelimpresora->getAllPrinters();
         $this->improrasview->renderFiltrado($impresoras, $filtro);
     }
 
-
     /*------------  Registro y Vista Admin ----------*/
 
     function showAdmin()
     {
-
-        $rol = $this->authHelper->checkRol();
-
+        $rol = $this->authHelper->checkRol();  //Verifica permisos.
         if ($rol) {
             $this->authHelper->checkLoggedIn();
             $impresoras = $this->modelimpresora->getAllPrinters();
             $metodos = $this->metodomodel->getAllMetodos();
-            $this->userview->renderAdmin($impresoras, $metodos);   //agregar, borrar, editar.
+            $this->userview->renderAdmin($impresoras, $metodos);   //ABM.
         } else {
             echo "No tiene derechos de administrador";
         }
     }
 
-    function showRegister()
+    function showRegister() //Formulario de registro.
     {
         $this->userview->renderRegister();
         if (!empty($_POST['email']) && !empty($_POST['password'])) {  //Verifico si los campos estan vacios o no.

@@ -3,42 +3,56 @@ require_once 'helper/authhelper.php';
 
 class metodoController
 {
-
-    private $metodomodel;   
+    private $metodomodel;
     private $impresoramodel;
     private $userview;
-
+    private $user;
 
     public function __construct()
     {
         $this->userview = new UserView();
         $this->metodomodel = new MetodoModel();
         $this->impresoramodel = new ImpresoraModel();
+        $this->user = new AuthHelper();
     }
 
-
-    function agregarMetodo()
+    function agregarMetodo()  //Agrega metodo de impresion.
     {
-        $this->metodomodel->createMetodo();
-        $this->userview->refreshAdmin();
-    }
-
-    function editMetodo()
-    {
-        $id = $_POST['id_metodo'];
-        $newMetodo = $_POST['input_metodo'];
-        $this->metodomodel->editarMetodo($id, $newMetodo);
-        $this->userview->refreshAdmin();
-    }
-
-    function deleteMetodo($id)
-    {
-        $ImpresoraID = $this->impresoramodel->getPrinterByMetodo($id);
-        if (!empty($ImpresoraID)) {
+        $rol = $this->user->checkRol();
+        if ($rol) {
+            $this->metodomodel->createMetodo();
             $this->userview->refreshAdmin();
         } else {
-            $this->metodomodel->deleteMetodoByID($id);
+            echo "Ud. no puede eliminar impresora";
+        }
+    }
+
+    function editMetodo()  //Edita metodo de impresion.
+    {
+        $rol = $this->user->checkRol();
+        if ($rol) {
+            $id = $_POST['id_metodo'];
+            $newMetodo = $_POST['input_metodo'];
+            $this->metodomodel->editarMetodo($id, $newMetodo);
             $this->userview->refreshAdmin();
+        } else {
+            echo "Ud. no puede eliminar impresora";
+        }
+    }
+
+    function deleteMetodo($id)  //Eliminar metodo. Si hay impresora vinculada al metodo, no se puede eliminar.
+    {
+        $rol = $this->user->checkRol();
+        if ($rol) {
+            $ImpresoraID = $this->impresoramodel->getPrinterByMetodo($id);
+            if (!empty($ImpresoraID)) {
+                $this->userview->refreshAdmin();
+            } else {
+                $this->metodomodel->deleteMetodoByID($id);
+                $this->userview->refreshAdmin();
+            }
+        } else {
+            echo "Ud. no puede eliminar impresora";
         }
     }
 }
