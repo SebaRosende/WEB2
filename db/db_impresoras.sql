@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2021 a las 04:00:02
+-- Tiempo de generación: 25-11-2021 a las 04:11:44
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -39,12 +39,28 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `detalle`, `puntaje`, `id_impresora_fk`) VALUES
-(22, 'Muy buen rendimiento', 5, 41),
-(122, 'Medio pelo, zafa', 3, 41),
-(123, 'dsfsdfsdf', 1, 41),
-(124, 'dsfsdfsdfghgdjkjdjk', 4, 41),
-(125, 'dsfdsgsy<ry4byb4w<', 1, 46),
-(137, 'werwerwe', 1, 46);
+(163, 'Se tapa rapido', 2, 1),
+(164, 'Funciona', 3, 1),
+(165, 'Buena calidad', 4, 2),
+(166, 'Podria ser mejor.', 3, 41),
+(167, 'Sirve para una casa, nada mas.', 4, 41),
+(168, 'Se rompe de nada', 1, 41),
+(169, 'Requiere mucha calibracion', 1, 44),
+(170, 'Imprime desde el primer momento', 3, 44),
+(171, 'Muy buena definición', 5, 44),
+(172, 'Casi 1,2mt ', 4, 45),
+(173, 'Hice 4 metros de lona sin problema', 5, 45),
+(174, 'Se tapa el solvente', 2, 45),
+(175, 'Fotos a puro color', 5, 46),
+(176, 'Calidad excelente', 5, 46),
+(177, 'Se marca la imagen', 3, 46),
+(178, 'Se trabo el papel, no sirve', 1, 46),
+(179, 'Larga las hojas como loco!', 5, 50),
+(180, 'Imprime muy bien ', 4, 50),
+(181, 'Se atora la hoja ', 2, 50),
+(182, 'Sirve para lo que es ', 2, 1),
+(183, 'Imprime medio medio ', 3, 2),
+(184, 'No sirve ni pa bosta', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -66,13 +82,13 @@ CREATE TABLE `impresoras` (
 --
 
 INSERT INTO `impresoras` (`id_impresora`, `modelo`, `marca`, `descripcion`, `id_metodo_fk`, `imagen`) VALUES
-(3, 'LX300', 'Epson', 'Solo imprime en blanco y negro.', 2, NULL),
-(40, 'M651', 'Epson', 'Imprime color, escanea. ', 1, NULL),
-(41, 'M607', 'HP test 2', 'test_555', 1, NULL),
+(1, 'LX300', 'Epson', 'Solo imprime en blanco y negro.', 2, 'img/619efde642d88.jpg'),
+(2, 'M651', 'Epson', 'Imprime color, escanea. ', 1, 'img/619efdf0221c7.jpg'),
+(41, 'M607', 'HP test 2', 'test_555', 1, 'img/619efdf726e19.jpg'),
 (44, 'Ender-3', 'Creality', 'Impresora 3D', 85, 'img/Creality_Ender3.jpg'),
-(45, 'Deskjet 430_7', 'Canon', 'Plotter de impresion 3', 81, NULL),
-(46, 'ColorMax 750-3', 'Kodak Enterprise', 'Color fotografico', 1, NULL),
-(50, 'werwere', 'ewr', 'werwer', 1, NULL);
+(45, 'Deskjet 430_7', 'Canon', 'Plotter de impresion 3', 81, 'img/619efdff7b0a7.jpg'),
+(46, 'ColorMax 750-3', 'Kodak Enterprise', 'Color fotografico', 1, 'img/619efe04d757d.jpg'),
+(50, 'CW224-L', 'Brother', 'Laser color A4', 89, 'img/619efe0cc7ae9.jpg');
 
 -- --------------------------------------------------------
 
@@ -93,9 +109,9 @@ INSERT INTO `metodos` (`id_metodo`, `metodo`) VALUES
 (1, 'Laser'),
 (2, 'Tinta'),
 (3, 'Matriz_de_punto'),
-(81, 'Gran formato 3'),
+(81, 'Gran formato'),
 (85, 'Impresora FMD'),
-(89, '445565r6r56');
+(89, 'Laser Color');
 
 -- --------------------------------------------------------
 
@@ -185,7 +201,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT de la tabla `impresoras`
