@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2021 a las 16:04:18
--- Versión del servidor: 10.4.19-MariaDB
--- Versión de PHP: 8.0.6
+-- Tiempo de generación: 25-11-2021 a las 04:00:02
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,13 +39,12 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id_comentario`, `detalle`, `puntaje`, `id_impresora_fk`) VALUES
-(1, 'Buena impresora.', 2, 3),
-(2, 'Poco consumo de tinta.', 3, 3),
-(5, 'Buena calidad.', 4, 40),
-(6, 'No me gusto. Mucho ruido.', 1, 3),
 (22, 'Muy buen rendimiento', 5, 41),
-(33, 'Se traban las hojas', 1, 40),
-(34, 'Mala experiencia', 1, 40);
+(122, 'Medio pelo, zafa', 3, 41),
+(123, 'dsfsdfsdf', 1, 41),
+(124, 'dsfsdfsdfghgdjkjdjk', 4, 41),
+(125, 'dsfdsgsy<ry4byb4w<', 1, 46),
+(137, 'werwerwe', 1, 46);
 
 -- --------------------------------------------------------
 
@@ -55,20 +54,25 @@ INSERT INTO `comentarios` (`id_comentario`, `detalle`, `puntaje`, `id_impresora_
 
 CREATE TABLE `impresoras` (
   `id_impresora` int(11) NOT NULL,
-  `modelo` varchar(50) NOT NULL,
+  `modelo` varchar(100) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
-  `id_metodo_fk` int(11) NOT NULL
+  `id_metodo_fk` int(11) NOT NULL,
+  `imagen` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Volcado de datos para la tabla `impresoras`
 --
 
-INSERT INTO `impresoras` (`id_impresora`, `modelo`, `marca`, `descripcion`, `id_metodo_fk`) VALUES
-(3, 'LX300', 'Epson', 'Solo imprime en blanco y negro.', 2),
-(40, 'M651', 'Epson', 'Imprime color, escanea. ', 1),
-(41, 'M607', 'HP test 2', 'test', 1);
+INSERT INTO `impresoras` (`id_impresora`, `modelo`, `marca`, `descripcion`, `id_metodo_fk`, `imagen`) VALUES
+(3, 'LX300', 'Epson', 'Solo imprime en blanco y negro.', 2, NULL),
+(40, 'M651', 'Epson', 'Imprime color, escanea. ', 1, NULL),
+(41, 'M607', 'HP test 2', 'test_555', 1, NULL),
+(44, 'Ender-3', 'Creality', 'Impresora 3D', 85, 'img/Creality_Ender3.jpg'),
+(45, 'Deskjet 430_7', 'Canon', 'Plotter de impresion 3', 81, NULL),
+(46, 'ColorMax 750-3', 'Kodak Enterprise', 'Color fotografico', 1, NULL),
+(50, 'werwere', 'ewr', 'werwer', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -89,8 +93,9 @@ INSERT INTO `metodos` (`id_metodo`, `metodo`) VALUES
 (1, 'Laser'),
 (2, 'Tinta'),
 (3, 'Matriz_de_punto'),
-(81, 'metodo nuevo'),
-(82, 'metodo nuevo 2');
+(81, 'Gran formato 3'),
+(85, 'Impresora FMD'),
+(89, '445565r6r56');
 
 -- --------------------------------------------------------
 
@@ -132,7 +137,8 @@ INSERT INTO `usuarios` (`id`, `email`, `password`, `id_rol_fk`) VALUES
 (55, 'user@test', '$2y$10$7OfozF0Vvy82QOY9LDcuJunhgeejsUVOyd9/3pgWmVvI6TMeZT9h6', 2),
 (64, 'admin@tudai', '$2y$10$fd/IcnY6yxDlFpMIczP4CeGK7fldtaz0OzoU6G1usERKytuqnGUp.', 1),
 (65, 'yo@vos', '$2y$10$Gv0Q4VrK.icWifmP2Tdr.uZaRHDpLwyxxTlEJXVhcdV2PlAxKUhQC', 2),
-(66, 'admin@tudai', '$2y$10$ahg7Gu2I9amkMYfKhsbMYOKmNytWPFYnBlUSYoAhK3DmJpAH8UHce', 2);
+(72, 'joaquin@sarasa', '$2y$10$n2woNapDZS.14uDNrzRE7.XGLEHqVH9agr3WWrNuikfY3.5eZg.BW', 2),
+(73, 'sacoa@tudai', '$2y$10$1BokY5rt5hnxtBvmDGvyGOdGrNSl3eFhuFWrE5sg8kyKZM.ACPOdK', 2);
 
 --
 -- Índices para tablas volcadas
@@ -179,19 +185,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT de la tabla `impresoras`
 --
 ALTER TABLE `impresoras`
-  MODIFY `id_impresora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_impresora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `metodos`
 --
 ALTER TABLE `metodos`
-  MODIFY `id_metodo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id_metodo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -203,7 +209,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- Restricciones para tablas volcadas
