@@ -25,10 +25,10 @@
                                 </select>
                             </td>
                             {if $info->id_rol_fk >1}
-                                <td> <button class="btn_form" type="submit">EDITAR</button> </td>
-                                <td><a class="btn_form" href="eliminarUser/{$info->id}">Eliminar</a></td>
+                                <td> <button class="btn btn-success" type="submit">EDITAR</button> </td>
+                                <td><a class="btn btn-danger" href="eliminarUser/{$info->id}">Eliminar</a></td>
                             {else}
-                                <td> <button class="btn_form" type="submit">EDITAR</button> </td>
+                                <td> <button class="btn btn-success" type="submit">EDITAR</button> </td>
                             {/if}
 
                         </tr>

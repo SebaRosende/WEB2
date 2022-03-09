@@ -5,7 +5,7 @@ async function seleccionarMetodo() {
 
     let metodo = select.value
     try {
-        let respuesta = await fetch(`http://localhost/proyectos/WEB-2/PHP/TPE_SEBA/tpweb2/filtrado/${metodo}`);
+        let respuesta = await fetch(`http://localhost/proyectos/TPE_Web2_Tudai_01/TPE_Web2_1//filtrado/${metodo}`);
         if (respuesta.ok) {
             let html = await respuesta.text();
             document.querySelector("#ajax-contenedor").innerHTML = html;

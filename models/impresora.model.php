@@ -27,10 +27,17 @@ class ImpresoraModel
     }
 
 
-    function createImpresora($marca, $modelo, $descripcion, $metodo)
+    function createImpresora($marca, $modelo, $descripcion, $metodo, $image=null)
     {
-        $query = $this->db_impresoras->prepare('INSERT INTO impresoras (modelo, marca, descripcion, id_metodo_fk) VALUES (?,?,?,?)');
-        $query->execute([$modelo, $marca, $descripcion, $metodo]);
+        $pathImg = null;
+        if ($image) { 
+            $pathImg = $this->uploadImage($image);
+            $query = $this->db_impresoras->prepare('INSERT INTO impresoras (modelo, marca, descripcion, id_metodo_fk, imagen) VALUES (?,?,?,?,?)');
+            $query->execute([$modelo, $marca, $descripcion, $metodo, $pathImg]);}
+        else{
+            $query = $this->db_impresoras->prepare('INSERT INTO impresoras (modelo, marca, descripcion, id_metodo_fk) VALUES (?,?,?,?)');
+            $query->execute([$modelo, $marca, $descripcion, $metodo]);}
+        
     }
 
     function editImpresora($id_impresora, $marca, $modelo, $descripcion, $metodo, $image = null)
@@ -46,7 +53,12 @@ class ImpresoraModel
             $query->execute([$modelo, $marca, $descripcion, $metodo, $pathImg, $id_impresora]);
         }
     }
-
+    function uploadImage($image)
+    {
+        $filePath = 'img/' . uniqid() . "." . strtolower(pathinfo($_FILES['input_name']['name'], PATHINFO_EXTENSION));
+        move_uploaded_file($image, $filePath); //funcion predeterminada de php
+        return $filePath;
+    }
     function deleteImpresoraByID($id)
     {
         $query = $this->db_impresoras->prepare('DELETE FROM impresoras WHERE id_impresora= ?');
@@ -68,10 +80,5 @@ class ImpresoraModel
         $query->execute([$modelo, $marca, $descripcion, $metodo, $eliminar, $id]);
     }
 
-    function uploadImage($image)
-    {
-        $filePath = 'img/' . uniqid() . "." . strtolower(pathinfo($_FILES['input_name']['name'], PATHINFO_EXTENSION));
-        move_uploaded_file($image, $filePath); //funcion predeterminada de php
-        return $filePath;
-    }
+  
 }

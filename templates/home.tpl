@@ -20,7 +20,7 @@
             <td>{$info->marca}</td>
             <td>{$info->descripcion}</td>
             <td>{$info->metodo}</td>
-            <td><button type="submit">Detalles</button></td>
+            <td><button type="submit" class="btn btn-primary btn-sm">Detalles</button></td>
             <td><input id="id_oculto" type="number" name="id" value={$info->id_impresora}></td> 
         </tr>
     </form>

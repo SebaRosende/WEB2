@@ -1,6 +1,6 @@
 <?php
 
-require_once 'controllers/controller.php';
+
 require_once 'controllers/metodoController.php';
 require_once 'controllers/impresorasController.php';
 require_once 'controllers/authcontroller.php';
@@ -18,7 +18,7 @@ if (!empty($_GET['action'])) {
 }
 
 $params = explode('/', $action);
-$controlador = new controller();
+
 $controladorMetodo = new metodoController();
 $controladorImpresoras = new impresorasController();
 $controladorusuarios = new UserController();
@@ -26,20 +26,20 @@ $controladorusuarios = new UserController();
 
 switch ($params[0]) {
     case 'home':
-        $controlador->showHome();
+        $controladorImpresoras->showHome();
         break;
     case 'detalle':
-        $controlador->showDetails();
+        $controladorImpresoras->showDetails();
         break;
     case 'filtrar':
-        $controlador->showFilter();
+        $controladorImpresoras->showFilter();
         break;
     case 'filtrado':
-        $controlador->showFiltrado($params[1]);
+        $controladorImpresoras->showFiltrado($params[1]);
         break;
         /*------------ Cuentas y Administracion ---------*/
     case 'registrar':
-        $controlador->showRegister();
+        $controladorImpresoras->showRegister();
         break;
     case 'login':
         $authController = new AuthController();
@@ -55,7 +55,7 @@ switch ($params[0]) {
         break;
     case 'administrar':
         $authController = new AuthController();
-        $controlador->showAdmin();  //Administracion (Agregar, eliminar, editar, etc.).
+        $controladorImpresoras->showAdmin();  //Administracion (Agregar, eliminar, editar, etc.).
         break;
 
 
@@ -72,12 +72,7 @@ switch ($params[0]) {
         $authController = new AuthController();
         $controladorImpresoras->eliminarImpresora($params[1]);
         break;
-        /*
-    case 'upload_image':
-        $authController = new AuthController();
-        $controladorImpresoras->uploadImage();
-        */
-
+    
         /*---------  Administrar Metodos ----------------*/
     case 'agregar_metodo':
         $authController = new AuthController();
@@ -107,6 +102,6 @@ switch ($params[0]) {
         break;
 
     default:
-        $controlador->showHome();  //Por defecto va al Home.
+    $controladorImpresoras->showHome();  //Por defecto va al Home.
         break;
 }

@@ -17,7 +17,7 @@ class AuthHelper
         $_SESSION['LAST_ACTIVITY'] = time();
         $_SESSION['ULTIMO_ACCESO'] = date("Y-n-j H:i:s");
     }
-
+/*
     public function UserLogged()  //Verifica Sesion abierta.
     {
         if (isset($_SESSION['USER_ID'])) {
@@ -32,7 +32,7 @@ class AuthHelper
             }
         }
     }
-
+*/
     public function checkLoggedIn()  //Verifica si esta logueado.
     {
         if (isset($_SESSION['USER_ID'])) {
@@ -64,7 +64,7 @@ class AuthHelper
     function logout()  //Termina la sesion.
     {
         session_destroy();
-        header("Location: " . BASE_URL . 'home');
+        header("Location: " . BASE_URL);
         die();
     }
 }

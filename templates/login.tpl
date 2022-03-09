@@ -13,7 +13,7 @@
         <input required="required" type="password" name="password" class="form-control" id="" placeholder="Ingrese su password...">
     </div>
     <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Login</button>
+        <button type="submit" class="btn btn-outline-primary">Login</button>
     </div>
 </form>
 </div>

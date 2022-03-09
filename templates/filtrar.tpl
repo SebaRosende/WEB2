@@ -4,7 +4,7 @@
 <h3>Seleccione el tipo de impresora</h3>
 <br>
 
-<form>
+
     <div class="form-group">
         <label>Sistema</label>
             <select name="select" id="selectMetodo">
@@ -15,13 +15,13 @@
 
 
    </select>
-    </form>
+  
 
 
     </div>
     
 
-    <div id="ajax-contenedor">
+    <div  id="ajax-contenedor">
     
     </div>
 

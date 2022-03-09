@@ -1,17 +1,15 @@
 {literal}
     <div id="app">
-        <h2>{{ titulo }} </h2>  
-         {/literal} {if isset($smarty.session.USER_ID)} {literal}
-            <button  v-on:click="ascendente(comentarios[0].id_impresora_fk)">menor a mayor</button>
-            <button  v-on:click="descendente(comentarios[0].id_impresora_fk)">mayor a menor</button>  
-        {/literal} {/if} {literal}    
+        <h4>{{ titulo }} </h4>  
+         {/literal} {literal}    
         <ul class="list-group">                
             <li v-for="dato in comentarios" class="list-group-item d-flex">
-                {{dato.detalle}}       
+               {{dato.detalle}} - &nbsp
                 <div>
                     {{ calificacion }} {{dato.puntaje}}
                 </div>             
 {/literal}
+
 
 {if isset($smarty.session.USER_ID)}
     {if ($smarty.session.USER_ROL)==1}
@@ -26,8 +24,21 @@
 {/if}
 
 {literal}
-        </li>        
-            
-        </div>
+  
+            </li>    
+ {/literal}
+   
+        {if isset($smarty.session.USER_ID)} {literal}
+            <div>  <button  v-on:click="ascendente(comentarios[0].id_impresora_fk)" class="btn btn-info btn-sm">Orden Ascendente</button>
+            <button  v-on:click="descendente(comentarios[0].id_impresora_fk)" class="btn btn-info btn-sm">Orden Descendente</button>  
+            </div>
+        {/literal} 
+        {/if}
+    {literal}  
+       </div>
         </ul>  
+
 {/literal}
+
+
+

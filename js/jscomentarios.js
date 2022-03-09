@@ -29,10 +29,11 @@ form.addEventListener('submit', AddComentarios);
 let id = document.querySelector("#id-coment");
 
 async function MostrarComentarios() {  //Busca comentarios por un ID de impresora.
+   
     try {
         let response = await fetch(API_URL + `/${id.value}`);
         let nComentarios = await response.json();
-        app.comentarios = nComentarios;
+        app.comentarios = nComentarios;    
     }
     catch (error) {
         console.log(error);
@@ -57,9 +58,11 @@ async function AddComentarios(e) {  //Agrega comentario.
             },
             body: JSON.stringify(comentario),
         });
+        
         if (response.ok) {
             let dato = await response.json();
             app.comentarios.push(dato);  //Pushea e imprime.
+           
         }
     } catch (e) {
         console.log(e)

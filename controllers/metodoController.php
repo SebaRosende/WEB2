@@ -1,5 +1,6 @@
 <?php
 require_once 'helper/authhelper.php';
+require_once 'view/error.view.php';
 
 class metodoController
 {
@@ -7,6 +8,7 @@ class metodoController
     private $impresoramodel;
     private $userview;
     private $user;
+    private $errorview;
 
     public function __construct()
     {
@@ -14,6 +16,7 @@ class metodoController
         $this->metodomodel = new MetodoModel();
         $this->impresoramodel = new ImpresoraModel();
         $this->user = new AuthHelper();
+        $this->errorview = new ErrorView();
     }
 
     function agregarMetodo()  //Agrega metodo de impresion.
@@ -23,7 +26,7 @@ class metodoController
             $this->metodomodel->createMetodo();
             $this->userview->refreshAdmin();
         } else {
-            echo "Ud. no puede eliminar impresora";
+            $this->errorview->errorAdmin();
         }
     }
 
@@ -36,7 +39,7 @@ class metodoController
             $this->metodomodel->editarMetodo($id, $newMetodo);
             $this->userview->refreshAdmin();
         } else {
-            echo "Ud. no puede eliminar impresora";
+            $this->errorview->errorAdmin();
         }
     }
 
@@ -52,7 +55,7 @@ class metodoController
                 $this->userview->refreshAdmin();
             }
         } else {
-            echo "Ud. no puede eliminar impresora";
+            $this->errorview->errorAdmin();
         }
     }
 }
